@@ -35,7 +35,7 @@
               <td>{{ userInfo.state }}</td>
               <td>{{ userInfo.zipcode }}</td>
               <td>{{ userInfo.email_address }}</td>
-              <td>{{ userInfo.id }}</td>
+              <td><a href="{% url 'userInfo' userInfo.id %}">{{ userInfo.id }}</a></td>
             </tr>
             {% endfor %}
           {% endif %}

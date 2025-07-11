@@ -64,3 +64,12 @@ def signup(request):
     else:
         return render(request, 'signup.html')
     
+
+def getUserInformation(request, pk):
+    if request.user.is_authenticated:
+        userInfo = UserInformation.objects.get(id=pk)
+        return render(request, 'user.html', {'userInfo': userInfo})
+    else:
+        messages.success(request, "You must be logged in...")
+        return redirect('home')
+    

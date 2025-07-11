@@ -3,11 +3,16 @@ from django.contrib.auth.models import User, auth
 from django.contrib.auth import authenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .models import UserInformation
 
 
 # Create your views here.
 
 def home(request):
+
+    #get all objects from UserInformation model
+    userInfo = UserInformation.objects.all()
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -22,7 +27,7 @@ def home(request):
             messages.success(request, "There Was An Error Login In ! Please Try Again...")
             return redirect('home')
     else:
-        return render(request, 'home.html')
+        return render(request, 'home.html', {'userInfo':userInfo})
 
 
 '''def login_user(request):

@@ -36,7 +36,7 @@
 
 <div>
     <a href="{% url 'home' %}" class="btn btn-primary">Home</a>
-    <a href="{% url 'home' %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'delete' userInfo.id %}" class="btn btn-danger">Delete</a>
 </div>
 
 {% endif %}

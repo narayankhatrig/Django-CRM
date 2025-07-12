@@ -64,7 +64,7 @@ def signup(request):
     else:
         return render(request, 'signup.html')
     
-
+#function to get user information from database
 def getUserInformation(request, pk):
     if request.user.is_authenticated:
         userInfo = UserInformation.objects.get(id=pk)
@@ -73,3 +73,14 @@ def getUserInformation(request, pk):
         messages.success(request, "You must be logged in...")
         return redirect('home')
     
+
+#function to delete a record
+def deleteUserInformation(request, pk):
+    if request.user.is_authenticated:
+        userInfo = UserInformation.objects.get(id=pk)
+        userInfo.delete()#deletes the record
+        messages.success(request, "The user information is deleted !")
+        return redirect('home')
+    else:
+        messages.success(request, "You must be logged in to delete user information")
+        return redirect('home')

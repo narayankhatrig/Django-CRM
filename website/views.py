@@ -84,3 +84,33 @@ def deleteUserInformation(request, pk):
     else:
         messages.success(request, "You must be logged in to delete user information")
         return redirect('home')
+    
+
+#function to add new users
+def addUserInformation(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            firstname = request.POST['firstname']
+            lastname = request.POST['lastname']
+            email_address = request.POST['email_address']
+            address = request.POST['address']
+            city = request.POST['city']
+            state = request.POST['state']
+            zipcode = request.POST['zipcode']
+
+            if UserInformation.objects.filter(email_address=email_address).exists():
+                if UserInformation.objects.filter(firstname=firstname).exists():
+                    messages.success(request, "The user already exists")
+                    return redirect('home')
+                else:
+                    return -1
+            else:
+                userinfo = UserInformation.objects.create(firstname=firstname, lastname=lastname, email_address=email_address,address=address,city=city,state=state,zipcode=zipcode)
+                userinfo.save()
+                messages.success(request, "User added successfully...")
+                return redirect('home')
+        else:
+            return render(request, 'add_user.html')
+    else:
+        messages.success(request,"You must be logged in...")
+        return redirect('home')

@@ -1,0 +1,1 @@
+In this project, we build a simple customer relationship management (CRM) program that allows us to perform CRUD (CREATE, READ, UPDATE, DELETE) operation on the information stored in the database. User can register to the system and login, logout functionality is also implemented.
